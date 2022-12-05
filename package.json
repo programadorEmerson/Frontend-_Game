@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "next build --profile",
+    "build:start": "next build && next start",
     "test": "jest",
     "start": "next start",
     "lint": "next lint",

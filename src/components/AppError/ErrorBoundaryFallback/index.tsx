@@ -9,6 +9,7 @@ import { InformationContainer } from '@/components/AppError/ErrorBoundaryFallbac
 import { ErrorPageTemplate } from '@/components/AppError/ErrorPageTemplate';
 
 import { ContentCopy } from '@mui/icons-material';
+
 import { Typography, Box, Button, Tooltip } from '@mui/material';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
