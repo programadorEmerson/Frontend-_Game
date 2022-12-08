@@ -164,7 +164,7 @@ const { READ, FREE } = FeatureCodeEnum; # FREE é a feature code
 NEXT_PUBLIC_ENVIRONMENT=dev
 NEXT_PUBLIC_TOKEN_PREFIX=app-name
 NEXT_PUBLIC_APP_NAME=App Name
-NEXT_PUBLIC_BACKEND_URL=api
+NEXT_PUBLIC_BACKEND_URL=http://localhost:5050
 ```
 
 <h1><br>
