@@ -1,5 +1,5 @@
 export enum FeatureCodeEnum {
-  SHARED = 'shared',
+  SHARED = 'F0000',
 }
 
 export enum FeatureCodeAction {

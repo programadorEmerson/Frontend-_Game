@@ -1,8 +1,10 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 
 import HeaderTitle from '@/components/HeaderTitle';
 
-import { ContainerLayout } from '@/styles/pages/layout';
+import TopBar from '../AppBar';
+import MenuDrawer from '../Menu';
+import { ContainerLayout } from './styles';
 
 type LayoutProps = {
   title: string;
@@ -10,10 +12,16 @@ type LayoutProps = {
 };
 
 const Layout: FC<LayoutProps> = ({ title, children }) => {
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const statusMenu = () => setOpenDrawer((prev) => !prev);
   return (
     <ContainerLayout>
       <HeaderTitle title={title} />
-      {children}
+      <TopBar open={openDrawer} statusMenu={statusMenu} />
+      <MenuDrawer openDrawer={openDrawer} statusMenu={statusMenu}>
+        {children}
+      </MenuDrawer>
     </ContainerLayout>
   );
 };

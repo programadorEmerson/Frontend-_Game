@@ -1,9 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
 
+import jwtDecode from 'jwt-decode';
+
+import { EndpointsEnum } from '@/enums/endpoints';
+
+import { DecodeInterface } from '@/interfaces/decode';
+
+import UserModel from '@/models/user';
+
 import { TOKEN_PREFIX } from '@/utils/tokens';
 
 import { destroyCookie, parseCookies } from 'nookies';
-
 export class ApiService {
   constructor(
     private cookies = parseCookies(),
@@ -56,7 +63,7 @@ export class ApiService {
     config: AxiosRequestConfig,
   ): Promise<AxiosRequestConfig> {
     if (this.token && config.headers) {
-      config.headers['Authorization'] = this.token;
+      config.headers['Authorization'] = `Bearer ${this.token}`;
     }
     return config;
   }
@@ -84,8 +91,16 @@ export class ApiService {
     return this.apiConfig;
   }
 
-  public async getApiToken(): Promise<string> {
+  public getApiToken(): string {
     return this.token;
+  }
+
+  public async decodeToken(): Promise<DecodeInterface> {
+    const { _id, redefinePassword } = jwtDecode<DecodeInterface>(this.token);
+    const { email } = await this.get<UserModel>(
+      `${EndpointsEnum.USERS}/${EndpointsEnum.ME}`,
+    );
+    return { _id, redefinePassword, email };
   }
 
   public async getApiCookie(cookie: string): Promise<string> {

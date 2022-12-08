@@ -6,4 +6,7 @@ export enum ErrorEnum {
   EXPIRED_TOKEN = 'Token expirado',
   ERROR_SIGNIN = 'Erro ao realizar login',
   ROLE_NOT_FOUND = 'Regra não encontrada',
+  PASSWORD_NOT_MATCH = 'As senhas não conferem',
+  EMPTY_PASSWORD_CONFIRMATION = 'É necessário confirmar a senha',
+  INVALID_CODE = 'Código inválido',
 }

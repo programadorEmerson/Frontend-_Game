@@ -3,11 +3,14 @@ import * as React from 'react';
 
 import { AppProps } from 'next/app';
 
+import { CssBaseline } from '@mui/material';
+
 import createEmotionCache from '@/styles/createEmotionCache';
 
+import 'react-toastify/dist/ReactToastify.css';
 import { AbilityProvider } from '@/contexts/ability';
-import ColorModeProvider from '@/contexts/ColorMode';
 import { UserProvider } from '@/contexts/user';
+import { ToastContainer } from 'react-toastify';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -19,13 +22,13 @@ export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <CacheProvider value={emotionCache}>
-      <ColorModeProvider>
-        <UserProvider>
-          <AbilityProvider>
-            <Component {...pageProps} />
-          </AbilityProvider>
-        </UserProvider>
-      </ColorModeProvider>
+      <CssBaseline />
+      <ToastContainer />
+      <UserProvider>
+        <AbilityProvider>
+          <Component {...pageProps} />
+        </AbilityProvider>
+      </UserProvider>
     </CacheProvider>
   );
 }
