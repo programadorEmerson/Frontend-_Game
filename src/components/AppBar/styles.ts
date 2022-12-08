@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { styled, Toolbar } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 import { drawerWidth } from '../Menu/styles';
@@ -23,3 +23,8 @@ export const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+export const ToolbarApp = styled(Toolbar)`
+  display: flex;
+  justify-content: space-between;
+`;

@@ -3,7 +3,7 @@ import UserModel from '@/models/user';
 
 export type ResponseSignin = {
   token: string;
-  userInfo: UserModel;
+  userInfo: UserModel | null;
 };
 
 export type SigninInterface = {

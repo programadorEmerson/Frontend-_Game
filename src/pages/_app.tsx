@@ -7,8 +7,10 @@ import { CssBaseline } from '@mui/material';
 
 import createEmotionCache from '@/styles/createEmotionCache';
 
+import 'react-toastify/dist/ReactToastify.css';
 import { AbilityProvider } from '@/contexts/ability';
 import { UserProvider } from '@/contexts/user';
+import { ToastContainer } from 'react-toastify';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -21,6 +23,7 @@ export default function MyApp(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <CssBaseline />
+      <ToastContainer />
       <UserProvider>
         <AbilityProvider>
           <Component {...pageProps} />

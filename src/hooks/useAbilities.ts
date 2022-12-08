@@ -7,7 +7,6 @@ import { FeatureCodeEnum } from '@/enums/feature';
 import { createFullRule } from '@/utils/manageRules';
 
 import { AbilityContext } from '@/contexts/ability';
-import { UserContext, UserProps } from '@/contexts/user';
 import {
   AnyAbility,
   PureAbility,
@@ -16,6 +15,8 @@ import {
   SubjectRawRule,
   ExtractSubjectType,
 } from '@casl/ability';
+
+import { useAuthContext } from './useAuthContext';
 
 export type AbilitiesProps =
   | Array<
@@ -32,8 +33,6 @@ export type CaslAbilitiesProps = {
   featuresArray: string[];
   updateAbilities(rules: AbilitiesProps): void;
 };
-
-export const useAuthContext = (): UserProps => useContext(UserContext);
 
 export const useAbilitiesContext = (): AnyAbility => useContext(AbilityContext);
 
@@ -56,7 +55,7 @@ export const useAbilities = (): CaslAbilitiesProps => {
 
   useEffect(() => {
     const refreshAbilitiesState = () => {
-      user
+      user && user.rules.length > 0
         ? updateAbilities(user.rules)
         : updateAbilities(createFullRule(FeatureCodeEnum.SHARED));
     };

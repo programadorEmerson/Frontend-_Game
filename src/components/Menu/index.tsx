@@ -4,7 +4,7 @@ import { Close } from '@mui/icons-material';
 
 import { Divider, IconButton, useTheme, Drawer } from '@mui/material';
 
-import ItemsMenu from './ItemsMenu/itemsMenu';
+import ItemsMenu from './ItemsMenu';
 import { DrawerHeader, Main } from './styles';
 
 type MenuDrawerProps = {

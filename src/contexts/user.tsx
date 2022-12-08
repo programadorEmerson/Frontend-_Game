@@ -6,6 +6,8 @@ import {
   useState,
 } from 'react';
 
+import { AlertNotification } from '@/components/AlertNotification';
+
 import { RoutesEnum } from '@/enums/routes';
 
 import { ResponseSignin } from '@/interfaces/signin';
@@ -21,6 +23,7 @@ import { setCookie } from 'nookies';
 export interface UserProps {
   user: UserModel | null;
   updateUser: (dataSignin: ResponseSignin) => void;
+  handleLogout: () => void;
 }
 
 const configCookie = {
@@ -34,22 +37,31 @@ function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserModel | null>(null);
 
   const updateUser = (dataSignin: ResponseSignin) => {
-    const { userInfo } = dataSignin;
+    const { userInfo = null, token } = dataSignin;
     setUser(userInfo);
-    setCookie(undefined, TOKEN_PREFIX, dataSignin.token, { ...configCookie });
+    setCookie(undefined, TOKEN_PREFIX, token, { ...configCookie });
+  };
+
+  const handleLogout = () => {
+    const userService = new UserService();
+    setUser(userService.logout());
+    AlertNotification({
+      type: 'success',
+      message: 'Logout realizado com sucesso',
+    });
   };
 
   const getCurrentUser = useCallback(async () => {
     const userService = new UserService();
     const userData = await userService.getUser();
-    if (userData) setUser(userData);
+    setUser(userData);
   }, []);
 
   useEffect(() => {
     getCurrentUser();
   }, [getCurrentUser]);
 
-  const shared = { user, updateUser };
+  const shared = { user, updateUser, handleLogout };
 
   return <UserContext.Provider value={shared}>{children}</UserContext.Provider>;
 }
